@@ -64,3 +64,6 @@ const Page: React.FC<Props> = ({ children }) => (
 )
 
 export default Page
+
+// styled components create random IDs for each of components in server render and re-render in front end, so get another random IDs
+// To be consistently random on server and client
