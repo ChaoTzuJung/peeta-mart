@@ -43,7 +43,6 @@ const StyledGlobal = createGlobalStyle`
     }
 `;
 
-
 const StyledInner = styled.div`
     max-width: var(--maxWidth);
     margin: 0 auto;
@@ -57,10 +56,10 @@ type Props = {
 
 const Page: React.FC<Props> = ({ children }) => (
     <div>
+        <StyledGlobal />
         <Header />
         <StyledInner>{children}</StyledInner>
         {/* Inject global style */}
-        <StyledGlobal />
     </div>
 )
 
