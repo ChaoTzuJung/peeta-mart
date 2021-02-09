@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "keystone-next",
+    "dev": "keystone-next -p 8080",
     "seed-data": "keystone-next --seed-data"
   },
   "eslintConfig": {
