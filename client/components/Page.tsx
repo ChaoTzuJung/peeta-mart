@@ -1,7 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import Header from './Header';
 
-// command + . => add all missing imports
 const StyledGlobal = createGlobalStyle`
     @font-face {
         font-family: 'radnika_next';
@@ -49,7 +48,6 @@ const StyledInner = styled.div`
     padding: 2rem;
 `;
 
-// Reference: https://www.carlrippon.com/react-children-with-typescript/
 type Props = {
     children?: React.ReactNode;
 }
@@ -64,6 +62,3 @@ const Page: React.FC<Props> = ({ children }) => (
 )
 
 export default Page
-
-// styled components create random IDs for each of components in server render and re-render in front end, so get another random IDs
-// To be consistently random on server and client

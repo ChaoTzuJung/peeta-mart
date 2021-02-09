@@ -23,7 +23,6 @@
     "styled-components": "^5.2.1",
     "typescript": "4.0"
   },
-  "//": "This is our babel config, I prefer this over a .babelrc file",
   "babel": {
     "env": {
       "development": {
