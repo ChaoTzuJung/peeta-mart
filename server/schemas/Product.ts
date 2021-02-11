@@ -1,5 +1,5 @@
 import { list } from '@keystone-next/keystone/schema';
-import { integer, select, text } from '@keystone-next/fields';
+import { integer, relationship, select, text } from '@keystone-next/fields';
 
 // name epxort 
 const Product = list({
@@ -12,6 +12,15 @@ const Product = list({
                 displayMode: 'textarea'
             }
         }),
+        photo: relationship({
+            ref: 'ProductImage.product',
+            ui: {
+                displayMode: 'cards',
+                cardFields: ['image', 'altText'],
+                inlineCreate: { fields: ['image', 'altText'] },
+                inlineEdit: { fields: ['image', 'altText'] },
+            }
+        }),
         status: select({
             options: [
                 { label: 'Draft', value: 'DRAFT' },
@@ -22,7 +31,6 @@ const Product = list({
             ui: {
                 displayMode: 'segmented-control',
                 createView: { fieldMode: 'hidden' },
-
             }
         }),
         price: integer(),
