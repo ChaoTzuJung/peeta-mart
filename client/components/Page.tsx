@@ -57,7 +57,6 @@ const Page: React.FC<Props> = ({ children }) => (
         <StyledGlobal />
         <Header />
         <StyledInner>{children}</StyledInner>
-        {/* Inject global style */}
     </div>
 )
 
