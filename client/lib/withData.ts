@@ -1,12 +1,13 @@
 // Ref: https://stackoverflow.com/questions/64119385/difference-between-apollo-client-apollo-client-and-apollo-boost
-import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloLink, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
 import { onError } from '@apollo/link-error';
 import { getDataFromTree } from '@apollo/client/react/ssr';
 import { createUploadLink } from 'apollo-upload-client';
 import withApollo from 'next-with-apollo';
 import { endpoint, prodEndpoint } from '../config';
 
-function createClient({ headers, initialState }) {
+// @ts-ignore
+const createClient: ApolloClient<NormalizedCacheObject> = ({ headers, initialState }) => {
     return new ApolloClient({
         link: ApolloLink.from([
             onError(({ graphQLErrors, networkError }) => {
@@ -45,4 +46,5 @@ function createClient({ headers, initialState }) {
 }
 
 /* withApollo is a higher order function designed to work specifically with NextJS. We will pass our createClient function to it. */
+// @ts-ignore
 export default withApollo(createClient, { getDataFromTree });
