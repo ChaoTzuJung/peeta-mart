@@ -1,5 +1,33 @@
+import { useMutation } from '@apollo/client';
+import gql from 'graphql-tag';
 import useForm from '../lib/useForm';
 import Form from './styles/Form';
+import ErrorMessage from './ErrorMessage';
+
+const CREATE_PRODUCT_MUTATION = gql`
+    mutation createProductMutation(
+        # which variable are getting pass in
+        $name: String!
+        $description: String!
+        $image: Upload
+        $price: Int!
+    ) {
+        createProduct(
+            data: {
+                name: $name
+                description: $description
+                photo: { create: { image: $image, altText: $name } }
+                price: $price
+                status: "AVAILABLE"
+            }
+        ) {
+            id
+            name
+            price
+            description
+        }
+    }
+`;
 
 const CreateProduct = () => {
     const { inputs, handleChange, resetForm, clearForm } = useForm({
@@ -9,13 +37,24 @@ const CreateProduct = () => {
         description: 'These are the best shoes!',
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        // Submit the inputfields to the backend:
+        await createProduct();
+        clearForm();
     }
+
+    const [createProduct, { loading, error, data }] = useMutation(
+        CREATE_PRODUCT_MUTATION,
+        {
+            variables: inputs, // preload
+        }
+    );
 
     return (
         <Form onSubmit={handleSubmit}>
-            <fieldset aria-busy={true}>
+            <ErrorMessage error={error} />
+            <fieldset disabled={loading} aria-busy={loading}>
                 <label htmlFor="name">
                     Name
                     <input

@@ -41,7 +41,7 @@ const useForm = (initial = {}) => {
 
     const clearForm = () => {
         const blankState = (<any>Object).fromEntries(
-            (<any>Object).entire(inputs).map(([key, ]: [string, ]) => [key, ''])
+            (<any>Object).entries(inputs).map(([key, ]: [string, ]) => [key, ''])
         );
         setInputs(blankState);
     };
